@@ -1,8 +1,11 @@
 <template>
-  <h1>¿Quien es este Pokemon?</h1>
+  <h1 v-if="!pokemon">Espere por favor...</h1>
+  <div v-else>
+    <h1>¿Quien es este Pokemon?</h1>
 
-  <PokemonPicture :pokemonId="5" :showPokemon="true" />
-  <PokemonOptions :pokemons="pokemonArr" />
+    <PokemonPicture :pokemonId="pokemon.id" :showPokemon="showPokemon" />
+    <PokemonOptions :pokemons="pokemonArr" />
+  </div>
 </template>
 
 <script>
@@ -21,11 +24,17 @@ export default {
   data() {
     return {
       pokemonArr: [],
+      pokemon: null,
+      showPokemon: false,
     };
   },
   methods: {
     async mixPokemonsArr() {
       this.pokemonArr = await getPokemonOptions();
+
+      // Floor es para redondear y se multiplica por 4 xq quiero que este # este entre 0 y 3
+      const rndInt = Math.floor(Math.random() * 4);
+      this.pokemon = this.pokemonArr[rndInt];
     },
   },
   mounted() {
