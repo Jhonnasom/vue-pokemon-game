@@ -52,6 +52,8 @@ export default {
       } else {
         this.message = "Ooops, era " + this.pokemon.name + "!";
       }
+      console.log("Hola mundo", this.showPokemon);
+
       // if (pokemonId === this.pokemon.id) {
       //   this.showPokemon = true;
       //   this.message = "Correcto, es " + this.pokemon.name + "!";
